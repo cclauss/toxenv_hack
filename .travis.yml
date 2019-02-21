@@ -4,24 +4,24 @@ python:
   - 2.7
   #- 3.5
   #- 3.6
-  - 3.7
+  #- 3.7
 env:
   - TOXENV=django111
   - TOXENV=django20
-  - TOXENV=django21
+  #- TOXENV=django21
 matrix:
   exclude:
     - python: 2.7
       env: TOXENV=django20
-    - python: 2.7
-      env: TOXENV=django21
+    #- python: 2.7
+    #  env: TOXENV=django21
 install:
   - pip install --upgrade pip
   - pip install tox
 script:
-  - echo '${TOX_ENV}'  # Why does this not work?!?
-  - echo "${TOX_ENV}"  # Why does this not work?!?
-  - echo "TOX_ENV: ${TOX_ENV}"  # Why does this not work?!?
+  - echo $CI
+  - echo $TRAVIS_PYTHON_VERSION
+  - echo $TOX_ENV  # Why does this not work?!?
   - tox -e $TOX_ENV
 notifications:
   email: false

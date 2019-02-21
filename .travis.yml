@@ -1,0 +1,22 @@
+language: python
+dist: xenial  # required for Python >= 3.7 (travis-ci/travis-ci#9069)
+python:
+    - 2.7
+    - 3.5
+    - 3.6
+    - 3.7
+env:
+    - TOXENV=django111
+    - TOXENV=django20
+    - TOXENV=django21
+matrix:
+  exclude:
+    - python: 2.7
+      env: TOXENV=django20
+    - python: 2.7
+      env: TOXENV=django21
+script:
+    - echo "TOX_ENV: ${TOX_ENV}"  # Why does this not work?!?
+    - tox -e $TOX_ENV
+notifications:
+  email: false
